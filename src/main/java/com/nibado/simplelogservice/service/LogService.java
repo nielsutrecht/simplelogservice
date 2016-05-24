@@ -52,7 +52,7 @@ public class LogService {
 
     @PostConstruct
     public void init() {
-        jdbcTemplate.execute("CREATE TABLE IF NOT EXISTS logline(ip VARCHAR(255), created TIMESTAMP, message VARCHAR(255));");
+        jdbcTemplate.execute("CREATE TABLE IF NOT EXISTS logline(ip VARCHAR(255), created TIMESTAMP, message VARCHAR(10000));");
         jdbcTemplate.execute("CREATE TABLE IF NOT EXISTS user(ip VARCHAR(255), name VARCHAR(255));");
     }
 
