@@ -2,16 +2,9 @@ package com.nibado.simplelogservice.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-
 import static java.lang.System.currentTimeMillis;
 
-@Entity
 public class LogLine {
-    @Id
-    @GeneratedValue
     private long id;
     private String ip;
     private long timestamp;

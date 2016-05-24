@@ -1,0 +1,30 @@
+<!doctype html>
+<html ng-app="myApp" ng-controller="MainCtrl">
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+        <title>Twitter Markov Chain example</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" href="lib/css/bootstrap.min.css">
+        <link rel="stylesheet" href="lib/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="style.css">
+
+        <script src="lib/angular.min.js"></script>
+        <script src="app.js"></script>
+        <script src="directives/directives.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2">Time</div>
+                <div class="col-md-2">IP</div>
+                <div class="col-md-2">User</div>
+                <div class="col-md-6">Message</div>
+            </div>
+            <div class="row" ng-repeat="line in logLines | orderBy:'':reverse">
+                <line line="line"></line>
+            </div>
+        </div>
+    </body>
+</html>
