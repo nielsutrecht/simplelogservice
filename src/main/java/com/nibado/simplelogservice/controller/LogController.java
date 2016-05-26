@@ -1,5 +1,6 @@
 package com.nibado.simplelogservice.controller;
 
+import com.nibado.simplelogservice.model.User;
 import com.nibado.simplelogservice.service.LogService;
 import com.nibado.simplelogservice.model.LogLine;
 import org.slf4j.Logger;
@@ -47,7 +48,7 @@ public class LogController {
     }
 
     @RequestMapping(value = "/user", method = RequestMethod.GET)
-    public List<String> getUsers() {
+    public List<User> getUsers() {
         return logService.getUsers();
     }
 
@@ -59,12 +60,17 @@ public class LogController {
 
     @RequestMapping(value = "/state", method = RequestMethod.PUT)
     public void setState(@RequestBody String state) {
-
+        logService.setState(getIp(), state);
     }
 
     @RequestMapping(value = "/state", method = RequestMethod.GET)
-    public void getState() {
+    public String getState() {
+        return logService.getState(getIp());
+    }
 
+    @RequestMapping(value = "/state/{ip}/", method = RequestMethod.GET)
+    public String getState(@PathVariable String ip) {
+        return logService.getState(ip);
     }
 
     private String getIp() {

@@ -12,11 +12,17 @@ appModule.controller('MainCtrl', ['mainService','$scope', '$interval', '$routePa
     $scope.logLines = [];
     $scope.ip = $routeParams.ip;
     $scope.timer = null;
+    $scope.state = null;
 
     $scope.update = function() {
         mainService.getAll($scope.ip).then(function(lines) {
             $scope.logLines = lines;
         });
+        if($scope.ip) {
+            mainService.getState($scope.ip).then(function(state) {
+                $scope.state = state;
+            });
+        }
     }
 
     $scope.timer = $interval(function() {
@@ -29,6 +35,11 @@ appModule.controller('MainCtrl', ['mainService','$scope', '$interval', '$routePa
 }]);
 
 appModule.service('mainService', function($http) {
+    var plainTextTransform = {
+        transformResponse: function(data, headersGetter, status) {
+            return data;
+        }
+    };
     return {
         getAll : function(ip) {
             var url;
@@ -39,6 +50,12 @@ appModule.service('mainService', function($http) {
                 url = '/log/all'
             }
             return $http.get(url).then(function(response) {
+                return response.data;
+            });
+        },
+
+        getState : function(ip) {
+            return $http.get('/log/state/' + ip + '/', plainTextTransform).then(function(response) {
                 return response.data;
             });
         }

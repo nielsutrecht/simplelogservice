@@ -1,0 +1,14 @@
+package com.nibado.simplelogservice.model;
+
+import org.springframework.jdbc.core.RowMapper;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class UserRowMapper implements RowMapper<User> {
+    public static final String QUERY = "SELECT name, ip FROM user";
+    @Override
+    public User mapRow(ResultSet resultSet, int i) throws SQLException {
+        return new User(resultSet.getString(1), resultSet.getString(2));
+    }
+}
