@@ -32,6 +32,8 @@ appModule.controller('MainCtrl', ['mainService','$scope', '$interval', '$routePa
     $scope.$on('$locationChangeStart', function(){
         $interval.cancel($scope.timer);
     });
+
+    $scope.update();
 }]);
 
 appModule.service('mainService', function($http) {
