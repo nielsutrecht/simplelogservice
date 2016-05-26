@@ -1,10 +1,7 @@
 package com.nibado.simplelogservice.service;
 
-import com.nibado.simplelogservice.model.LogLine;
+import com.nibado.simplelogservice.model.*;
 
-import com.nibado.simplelogservice.model.LogLineRowMapper;
-import com.nibado.simplelogservice.model.User;
-import com.nibado.simplelogservice.model.UserRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -19,8 +16,6 @@ import java.util.Map;
 @Service
 public class LogService {
     private JdbcTemplate jdbcTemplate;
-
-    private Map<String, String> stateMap = new HashMap<>();
 
     @Autowired
     public void setDataSource(DataSource dataSource) {
@@ -53,17 +48,19 @@ public class LogService {
     }
 
     public void setState(String ip, String state) {
-        stateMap.put(ip, state);
+        jdbcTemplate.update("MERGE INTO state KEY(ip) VALUES(?, ?)", ip, state);
     }
 
     public String getState(String ip) {
-        return stateMap.get(ip);
+        return jdbcTemplate
+                .query("SELECT state FROM state WHERE ip = ?", new Object[] {ip }, new SingleStringMapper(1))
+                .stream()
+                .findFirst()
+                .orElse(null);
     }
 
     public List<User> getUsers() {
         List<User> users = jdbcTemplate.query(UserRowMapper.QUERY, new UserRowMapper());
-
-        users.forEach(u -> u.setState(stateMap.get(u.getIp())));
 
         return users;
     }
@@ -75,5 +72,6 @@ public class LogService {
         jdbcTemplate.execute("CREATE INDEX IF NOT EXISTS logline_created ON logline(created);");
 
         jdbcTemplate.execute("CREATE TABLE IF NOT EXISTS user (ip VARCHAR(255), name VARCHAR(255), PRIMARY KEY(ip));");
+        jdbcTemplate.execute("CREATE TABLE IF NOT EXISTS state (ip VARCHAR(255), state VARCHAR(255), PRIMARY KEY(ip));");
     }
 }

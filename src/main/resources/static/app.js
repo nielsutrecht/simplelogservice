@@ -1,10 +1,16 @@
 var appModule = angular.module('myApp', ['ngRoute']);
 
 appModule.config(function($routeProvider, $locationProvider) {
-    $routeProvider.when('/:ip?', {
+    $routeProvider
+        .when('/routes', {
+            templateUrl: 'routes.html',
+            controller: 'MainCtrl'
+        })
+        .when('/:ip?', {
         templateUrl: 'main.html',
         controller: 'MainCtrl'
     });
+
 });
 
 

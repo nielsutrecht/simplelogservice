@@ -5,9 +5,10 @@ public class User {
     private final String ip;
     private String state;
 
-    public User(String user, String ip) {
+    public User(String user, String ip, String state) {
         this.user = user;
         this.ip = ip;
+        this.state = state;
     }
 
     public String getUser() {

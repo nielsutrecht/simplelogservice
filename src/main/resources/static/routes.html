@@ -1,0 +1,22 @@
+<div class="container">
+    <h1>Routes</h1>
+    <h3>Log lines</h3>
+    <ul>
+        <li>GET /log: gets all log lines for the requesting IP</li>
+        <li>GET /log/{ip}/: gets all log lines for the sepcified IP</li>
+        <li>GET <a href="/log/all">/log/all</a>: gets all log lins</li>
+        <li>POST /log: creates a new log line, request body is a String</li>
+    </ul>
+    <h3>Log lines</h3>
+    <ul>
+        <li>PUT /log/user: sets the user name for this IP</li>
+        <li>GET <a href="/log/user">/log/user</a>: gets a list of all user names, their IPs and their states</li>
+    </ul>
+
+    <h3>Log lines</h3>
+    <ul>
+        <li>PUT /log/state: sets the current state for this IP</li>
+        <li>GET /log/state: gets the current state for this IP</li>
+        <li>GET /log/state/{ip}/: gets the current state for the provided IP</li>
+    </ul>
+</div>
