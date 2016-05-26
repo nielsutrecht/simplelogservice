@@ -1,0 +1,12 @@
+<div class="container">
+    <div ng-if="ip">Showing lines for IP {{ip}} <a href="#">Back</a></div>
+    <div class="row">
+        <div class="col-md-1">Time</div>
+        <div class="col-md-2">IP</div>
+        <div class="col-md-2">User</div>
+        <div class="col-md-7">Message</div>
+    </div>
+    <div class="row" ng-repeat="line in logLines">
+        <line line="line"></line>
+    </div>
+</div>

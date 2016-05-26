@@ -34,7 +34,7 @@ public class LogController {
         return logService.getAll();
     }
 
-    @RequestMapping(value = "/{ip}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{ip}/", method = RequestMethod.GET)
     public List<LogLine> getFor(@PathVariable String ip) {
         return logService.get(ip);
     }
@@ -55,6 +55,16 @@ public class LogController {
     public void setUser(@RequestBody String user) {
         LOG.info("Ip = {} set to user name {}", getIp(), user);
         logService.setName(getIp(), user);
+    }
+
+    @RequestMapping(value = "/state", method = RequestMethod.PUT)
+    public void setState(@RequestBody String state) {
+
+    }
+
+    @RequestMapping(value = "/state", method = RequestMethod.GET)
+    public void getState() {
+
     }
 
     private String getIp() {

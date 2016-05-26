@@ -1,4 +1,4 @@
-<div class="col-md-2">{{getTime() | date : 'yyyy-MM-dd HH:mm:ss.sss'}}</div>
-<div class="col-md-2">{{line.ip}}</div>
+<div class="col-md-1">{{getTime() | date : 'HH:mm:ss.sss'}}</div>
+<div class="col-md-2"><a ng-href="#{{line.ip}}">{{line.ip}}</a></div>
 <div class="col-md-2">{{line.user}}</div>
-<div class="col-md-6">{{line.message}}</div>
+<div class="col-md-7">{{line.message}}</div>
